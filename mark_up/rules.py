@@ -1,1 +1,74 @@
 # _*_ coding:utf-8 _*_
+class Rule:
+    """
+    规则父类
+    """
+    def action(self, block, handler):
+        """
+        加标记
+        """
+        handler.start(self.type)
+        handler.feed(block)
+        handler.end(self.type)
+        return True
+
+class HeadingRule(Rule):
+    """
+    一号标题规则
+    """
+    type = 'heading'
+    def condition(self, block):
+        """
+        判断文本是否符合规则
+        """
+        return not '\n' in block and len(block)<= 70 and not block[-1] == ':'
+
+class TitleRule(HeadingRule):
+    """
+    二号标题规则
+    """
+    type = 'title'
+    first = True
+
+    def condition(self, block):
+        if not self.first:return False
+            self.first = False
+            return HeadingRule.condition(self, block)
+
+class ListItemRule(Rule):
+    """
+    列表选项
+    """
+    type = 'listitem'
+    def condition(self, block):
+        return block[0] == '-'
+
+    def action(self, block, handler):
+        handler.start(self.type)
+        handler.feed(block[1:].strip())
+        handler.end(self.type)
+        return True
+
+class ListRule(listItemRule):
+    """
+    列表规则
+    """
+    type = 'list'
+    inside = False
+    def condition(self, block):
+        if not self.inside and listItemRule.condition(self, block):
+            handler,start(self.type)
+            self.inside = True
+        elif se;f.inside and not ListItemRule.condition(self, block):
+            handler.end(self.type)
+            self.inside = False
+        return False
+
+class ParagraphRule(Rule):
+    """
+    段落规则
+    """
+    type = 'paragraph'
+
+    def condition(self, block):
+        return True
