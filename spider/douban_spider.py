@@ -17,15 +17,18 @@ def book_spider(book_tag):
     page_num = 0
     book_list = []
     try_times = 0
+    f = open('lxm','w')
 
     while(1):
-        url = 'http://www.douban.com/tag/'+urllib.quote(book_tag)+'/book?start='+str(page_num*15)
+        url = 'https://www.douban.com/tag/'+urllib.quote(book_tag)+'/book?start='+str(page_num*20)
+        #url = 'https://www.douban.com/tag/'+urllib.quote(book_tag)+'?start='+str(page_num*20)+'&type=T'
         time.sleep(np.random.rand()*5)
 
         try:
             req = urllib2.Request(url, headers = hds[page_num%len(hds)])
             source_code = urllib2.urlopen(req).read()
             plain_text = str(source_code)
+            f.write(plain_text)
 
         except (urllib2.HTTPError, urllib2.URLError), e:
             print e
@@ -45,6 +48,7 @@ def book_spider(book_tag):
             desc = book_info.find('div', {'class':'desc'}).string.strip()
             desc_list = desc.split('/')
             book_url = book_info.find('a', {'class':'title'}).get('href')
+            print book_url
             try:
                 author_info = '作者/译者：'+'/'.join(desc_list[0:-3])
             except:
@@ -57,7 +61,7 @@ def book_spider(book_tag):
                 pub_info = '出版信息：暂无'
 
             try:
-                rating = book_info.find('span',{'class':'rating-Nums'}).string.strip()
+                rating = book_info.find('span',{'class':'rating_nums'}).string.strip()
 
             except:
                 rating='0.0'
@@ -74,16 +78,31 @@ def book_spider(book_tag):
         page_num+=1
         print 'Downloading Information From Page %d' %page_num
     return book_list
+def read_read(url):
+    try:
+        req = urllib2.Request(url, headers=hds[np.random.randint(0, len(hds))])
+        print req
+        source_code = urllib2.urlopen(req).read()
+        print source_code
 
+    except BaseException,b:
+        print b
 def get_people_num(url):
     try:
-        req = urllib2.Requeset(url, headers=hds[np.random.ranint(0, len(hds))])
+        req = urllib2.Request(url, headers=hds[np.random.randint(0, len(hds))])
         source_code = urllib2.urlopen(req).read()
         plain_text = str(source_code)
     except(urllib2.HTTPError, urllib2.URLError), e:
         print e
-    soup = BeautifunSoup(palin_text)
+    except BaseException,b:
+        print 'baseexception',b
+    print 'the soup------------------------1', palin_text
+    soup = BeautifunSoup(plain_text)
+    print 'the soup-----------2'
+    
     people_num = soup.find('div',{'class':'rating_sum'}).findAll('span')[1].string.strip()
+    print 'the soup-----------3'
+    print people_num,'people_num'
     return people_num
 
 def do_spider(book_tag_lists):
@@ -114,7 +133,8 @@ def print_book_lists_excel(book_lists, book_tag_lists):
     wb.save(save_path)
 
 if __name__ == '__main__':
-    book_tag_lists = ['科普','经典','生活','心灵','文学']
+    #book_tag_lists = ['科普','经典','生活','心灵','文学']
+    book_tag_lists = ['摄影']
     book_lists = do_spider(book_tag_lists)
     print_book_lists_excel(book_lists, book_tag_lists)
         
