@@ -92,12 +92,13 @@ def get_people_num(url):
         req = urllib2.Request(url, headers=hds[np.random.randint(0, len(hds))])
         source_code = urllib2.urlopen(req).read()
         plain_text = str(source_code)
+        print 'plain_text'
     except(urllib2.HTTPError, urllib2.URLError), e:
         print e
     except BaseException,b:
         print 'baseexception',b
-    print 'the soup------------------------1', palin_text
-    soup = BeautifunSoup(plain_text)
+    print 'the soup-----------1'
+    soup = BeautifulSoup(plain_text)
     print 'the soup-----------2'
     
     people_num = soup.find('div',{'class':'rating_sum'}).findAll('span')[1].string.strip()
