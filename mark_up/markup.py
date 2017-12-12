@@ -34,7 +34,7 @@ class Parser:
         """
         self.handler.start('document')
         for block in blocks(file):
-            for filter in se;f.filters:
+            for filter in self.filters:
                 block = filter(block, self.handler)
             for rule in self.rules:
                 if rule.condition(block):
@@ -57,7 +57,7 @@ class BasicTextParser(Parser):
 
         self.addFilter(r'\*(.+?)\*', 'emphasis')
         self.addFilter(r'(http://[\.a-zA-Z/]+)', 'url')
-        self.addFilter(r'([\.a-zA-Z]+@[\.a-zA-Z]+[a-zA-Z]+)')
+        self.addFilter(r'([\.a-zA-Z]+@[\.a-zA-Z]+[a-zA-Z]+)','mail')
 """
 ‘À––≥Ã–Ú
 """

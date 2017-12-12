@@ -9,7 +9,7 @@ class Handler:
         if callable(method):return method(*args)
 
     def start(self, name):
-        self.callable('start_', name)
+        self.callback('start_', name)
 
     def end(self, name):
         self.callback('end_', name)
@@ -39,8 +39,8 @@ class HTMLRenderer(Handler):
     def end_paragraph(self):
         print '</p>'
 
-    def start_heading(self:
-        print '/h2'
+    def start_heading(self):
+        print '<h2>'
 
     def end_heading(self):
         print '</h2>'

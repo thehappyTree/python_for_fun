@@ -2,7 +2,7 @@
 
 def lines(file):
     for line in file: yield line
-        yield '\n'
+    yield '\n'
 
 
 def blocks(file):

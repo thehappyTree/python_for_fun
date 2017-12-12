@@ -32,8 +32,8 @@ class TitleRule(HeadingRule):
 
     def condition(self, block):
         if not self.first:return False
-            self.first = False
-            return HeadingRule.condition(self, block)
+        self.first = False
+        return HeadingRule.condition(self, block)
 
 class ListItemRule(Rule):
     """
@@ -49,17 +49,19 @@ class ListItemRule(Rule):
         handler.end(self.type)
         return True
 
-class ListRule(listItemRule):
+class ListRule(ListItemRule):
     """
     列表规则
     """
     type = 'list'
     inside = False
     def condition(self, block):
-        if not self.inside and listItemRule.condition(self, block):
-            handler,start(self.type)
+        return True
+    def action(self, block,handler):
+        if not self.inside and ListItemRule.condition(self, block):
+            handler.start(self.type)
             self.inside = True
-        elif se;f.inside and not ListItemRule.condition(self, block):
+        elif self.inside and not ListItemRule.condition(self, block):
             handler.end(self.type)
             self.inside = False
         return False
