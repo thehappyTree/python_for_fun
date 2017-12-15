@@ -14,6 +14,7 @@ sys.setdefaultencoding('utf8')
 hds = [{'User_Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36'},{'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'}]
 
 def bus_spider():
+    print 'begin'
     page = 'p'
     page_num =1 
     try_time = 0
@@ -26,6 +27,7 @@ def bus_spider():
             plain_text = str(source_code)
 
         except (urllib2.HTTPError, urllib2.URLError), e:
+            print 's',e
             continue
         soup = BeautifulSoup(plain_text)
         list_soup = soup.find('div',{'id':'shop-all-list'})
