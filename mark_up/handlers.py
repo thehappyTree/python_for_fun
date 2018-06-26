@@ -2,8 +2,10 @@
 
 class Handler:
     '''
-    ´¦Àí³ÌĞò¸¸Àà
+    åˆå§‹åŒ–
     '''
+    def __init__(self):
+        pass
     def callback(self, prefix, name, *args):
         method = getattr(self, prefix + name,None)
         if callable(method):return method(*args)
@@ -22,7 +24,7 @@ class Handler:
         return substitution
 class HTMLRenderer(Handler):
     """
-    HTML´¦Àí³ÌĞò£¬¸øÎÄ±¾¼Óhtml±ê¼Ç
+    HTMLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬¸ï¿½ï¿½Ä±ï¿½ï¿½ï¿½htmlï¿½ï¿½ï¿½
     """
     def __init__(self):
         pass
