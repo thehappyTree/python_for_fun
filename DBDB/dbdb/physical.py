@@ -54,3 +54,11 @@ class Storage(object):
 
     def _write_integer(self):
         return self._bytes_to_integer(self._f.read(self.INTEGER_LENGTH))
+
+    def write(self, data):
+        self.lock()
+        self._seek_end()
+        object_address = self._f.tell()
+        self._write_integer(len(data))
+        self._f.write(data)
+        return object_address
