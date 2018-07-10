@@ -62,3 +62,5 @@ class Storage(object):
         self._write_integer(len(data))
         self._f.write(data)
         return object_address
+
+
