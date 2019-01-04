@@ -1,0 +1,4 @@
+cookie='Hm_lvt_f2de904b45de5fa1c111346641b534e8=1545972812; Hm_lpvt_f2de904b45de5fa1c111346641b534e8=1545972812; Qs_lvt_220478=1545972812; Qs_pv_220478=3251269252052834300; _ga=GA1.2.1127778078.1545972814; spoor_uid=dba18af13065409d92819c407d62ace0; spoor_shop_code=-; ticket=db1a910d-9f74-411e-8b68-290061809271; spoor_login_account_code=CLERKSLOGINACCOUNT2017092518191800514517; spoor_company_code=COMPANIESCOMPANY2017092518191801534519; JSESSIONID=AF9FEC242714D9790EDBF01AD1F2633C'
+
+hds = [{'User_Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36','Cookie':cookie},{'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6','cookie':cookie},{'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}]
+
