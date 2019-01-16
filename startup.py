@@ -54,22 +54,25 @@ class Configure:
 def pullData(phone):
     cf = Configure(phone)
     #价目表处理
-    #item = cf.getConfig('item')
-    #product = cf.getConfig('product')
-    #taocard = cf.getConfig('taocard')
-    #recharge = cf.getConfig('recharge')
-    ##parent_path,item,product,taocard,recharge
-    #ec = Exchange(phone, item, product, taocard, recharge)
-    #ec.action()
+    print "处理价目项数据"
+    item = cf.getConfig('item')
+    product = cf.getConfig('product')
+    taocard = cf.getConfig('taocard')
+    recharge = cf.getConfig('recharge')
+    #parent_path,item,product,taocard,recharge
+    ec = Exchange(phone, item, product, taocard, recharge)
+    ec.action()
 
     print "价目表处理完成"
 
 
     # 会员信息
+    print "会员开始"
     count = int(cf.getConfig('count'))
     memberReq = cf.getConfig('memberReq')
     cm = ColMember(phone,count,memberReq)
     cm.action()
+    print "会员完成"
 
     #充值卡
     chargeReq = cf.getConfig('chargeReq')
