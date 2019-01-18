@@ -54,38 +54,52 @@ class Configure:
 def pullData(phone):
     cf = Configure(phone)
     #价目表处理
-    #item = cf.getConfig('item')
-    #product = cf.getConfig('product')
-    #taocard = cf.getConfig('taocard')
-    #recharge = cf.getConfig('recharge')
-    ##parent_path,item,product,taocard,recharge
-    #ec = Exchange(phone, item, product, taocard, recharge)
-    #ec.action()
-
+    print '处理价目项先关内容'
+    item = cf.getConfig('item')
+    product = cf.getConfig('product')
+    taocard = cf.getConfig('taocard')
+    recharge = cf.getConfig('recharge')
+    merchantName = cf.getConfig('name')
+    #parent_path,item,product,taocard,recharge,merchantName
+    ec = Exchange(phone, item, product, taocard, recharge,merchantName)
+    ec.action()
     print "价目表处理完成"
 
 
     # 会员信息
+    print "处理会员信息"
     count = int(cf.getConfig('count'))
     memberReq = cf.getConfig('memberReq')
     cm = ColMember(phone,count,memberReq)
     cm.action()
+    print "会员信息生成"
 
     #充值卡
+    print "爬取充值卡信息......"
     chargeReq = cf.getConfig('chargeReq')
     rc = Recharge(phone,chargeReq)
     rc.action()
-    rce = Recharge2Excel(phone)
+    print "充值卡数据(json)爬取完成"
+
+    print "充值卡excel生成中......"
+    rce = Recharge2Excel(phone,merchantName)
     rce.action()
+    print "充值卡excel生成"
 
     #疗程卡
+    print "爬取疗程卡信息......"
     liaochengReq = cf.getConfig('liaochengReq')
     lc = LiaoCheng(phone,liaochengReq)
     lc.action()
-    lce = LiaoCheng2Excel(phone)
+    print "疗程卡数据(json)爬取完成"
+
+    print "充值卡excel生成中......"
+    lce = LiaoCheng2Excel(phone,merchantName)
     lce.action()
+    print "充值卡excel生成"
 
 if __name__ == '__main__':
     #cof = Confiure('')
-    phone = '18768174001'
+    #phone = '18768174001'
+    phone = '13915218983'
     pullData(phone)

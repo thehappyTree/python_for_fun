@@ -45,11 +45,9 @@ class Recharge:
 
                     for m in member_list:
                         k += 1
-                        print k,m['code']
                         params1['body']['belongToPartyCode'] = m['code']
                         textmod = json.dumps(params1)
                         time.sleep(np.random.rand())
-                        print m['code']
                         req = urllib2.Request(url,data=textmod, headers = headers)
                         res = urllib2.urlopen(req)
                         res = res.read()

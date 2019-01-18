@@ -3,7 +3,7 @@ import json
 from openpyxl import load_workbook,Workbook
 
 class Exchange:
-    def __init__(self,parent_path,item,product,taocard,recharge):
+    def __init__(self,parent_path,item,product,taocard,recharge,merchantName):
         self.parent_path = parent_path
         #p_tao = self.parent_path +'/' +'cardBrand_courseCard_taosubjects.json'
         #p_sub = self.parent_path +'/' + 'cardBrand_courseCard_subjects.json'
@@ -18,6 +18,8 @@ class Exchange:
         self._rec = json.load(open(p_rec,'r'))
         self._goods = json.load(open(p_goods,'r'))
 
+        self.merchantName = merchantName
+
     def getExcelSheet(self,index):
         wb = load_workbook('MerchantDataImportTemplateV1.0.xlsx')
         sheet_names = wb.get_sheet_names()
@@ -30,7 +32,6 @@ class Exchange:
         #ws = self.getExcelSheet(1)
         ws.append([u'编号',u'大类',u'小类'])
         content = []
-        #print self._sub
         bodys = self._sub['body']
         # bodys为大类级别
         start = 1001
@@ -124,7 +125,7 @@ class Exchange:
         self.kind5(self._sub['body'],self._tao['body'])
         self.kind7(self._goods['body'])
         self.kind9(self._rec['body'])
-        wb.save(self.parent_path+'/feilei.xlsx')
+        wb.save(self.parent_path+'/'+self.parent_path + self.merchantName + '_大小类分类.xlsx')
 
     def kind5(self,content_sub,content_tao):
         wb = Workbook()
@@ -233,7 +234,6 @@ class Exchange:
             age = sheet.cell(row=x,column=4).value
             sex = sheet.cell(row=x,column=6).value
             phone = sheet.cell(row=x,column=8).value
-            print num
             c_d[str(num)] = [name,age,sex,phone]
 
         with open(self.parent_path +'/mybqzcard.txt') as f:
