@@ -29,7 +29,6 @@ class ColMember:
         try:
             headers = {'Content-Type':'application/json','Host':'api-b.imeiyebang.com'}
             page = int(math.ceil(self.count/50.0))
-            print page
             pageFilePath = self.parent_path+'/memberpage'
             if not os.path.exists(pageFilePath):
                 os.makedirs(pageFilePath)
@@ -40,7 +39,6 @@ class ColMember:
                 res = urllib2.urlopen(req)
                 res = res.read()
                 wFile = open(self.parent_path+'/memberpage/page_'+str(m),'w')
-                print m
                 wFile.write(res)
                 wFile.close()
                 time.sleep(np.random.rand())
