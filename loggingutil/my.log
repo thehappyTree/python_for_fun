@@ -1,5 +1,0 @@
-2019-01-16 19:16:51,420 - DEBUG - this is debug log
-2019-01-16 19:16:51,421 - INFO - This is a info log.
-2019-01-16 19:16:51,421 - WARNING - This is a warning log.
-2019-01-16 19:16:51,421 - ERROR - This is a error log.
-2019-01-16 19:16:51,421 - CRITICAL - This is a critical log.
